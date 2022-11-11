@@ -6,7 +6,7 @@ spring:
     name: imusic
 
   profiles:
-    active: pro
+    active: dev
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
