@@ -1,0 +1,25 @@
+{
+  "containerPort": 80,
+  "minNum": 0,
+  "maxNum": 10,
+  "cpu": 1,
+  "mem": 2,
+  "policyType": "cpu",
+  "policyThreshold": 50,
+  "policyDetails": [
+    {
+      "PolicyType": "cpu",
+      "PolicyThreshold": 50
+    },
+    {
+      "PolicyType": "mem",
+      "PolicyThreshold": 50
+    }
+  ],
+  "envParams": {},
+  "customLogs": "stdout",
+  "dataBaseName": "imusic",
+  "executeSQLs": [
+    "CREATE DATABASE IF NOT EXISTS imusic;"
+  ]
+}

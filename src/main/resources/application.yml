@@ -1,0 +1,18 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: imusic
+
+  profiles:
+    active: pro
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_ADDRESS}/${MYSQL_DATABASE}?serverTimezone=Asia/Shanghai&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: ${MYSQL_USER_NAME}
+    password: ${MySQL_PASSWORD}
+
+
+
