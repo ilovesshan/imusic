@@ -14,9 +14,13 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
+<<<<<<< HEAD
         <datasource-mapping>
           <factory-entry name="imusic" />
         </datasource-mapping>
+=======
+        <datasource-mapping />
+>>>>>>> dev
         <naming-strategy-map />
       </configuration>
     </facet>
