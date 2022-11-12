@@ -17,5 +17,11 @@ spring:
     username: ${MYSQL_USER_NAME}
     password: ${MySQL_PASSWORD}
 
+  flyway:
+    enabled: true
+
+  jpa:
+    generate-ddl: false
+    show-sql: true
 
 
