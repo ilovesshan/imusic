@@ -5,8 +5,11 @@ spring:
   application:
     name: imusic
 
+  config:
+    import: optional:file:.env[.properties]
+
   profiles:
-    active: pro
+    active: dev
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -14,5 +17,11 @@ spring:
     username: ${MYSQL_USER_NAME}
     password: ${MySQL_PASSWORD}
 
+  flyway:
+    enabled: true
+
+  jpa:
+    generate-ddl: false
+    show-sql: true
 
 
