@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: imusic
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:imusic;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL;NON_KEYWORDS=USER
+    username: sa
+    password:
+
+
+  sql:
+    init:
+      continue-on-error: false
+      platform: h2
+
+  flyway:
+    enabled: false
+
+  jpa:
+    generate-ddl: false
+    show-sql: true
+
+  h2:
+    console:
+      path: /h2
+      enabled: true
+      settings:
+        web-allow-others: true
