@@ -2,6 +2,7 @@ package com.ilovesshan.imusic.controller;
 
 import com.ilovesshan.imusic.common.R;
 import com.ilovesshan.imusic.converter.UserConverter;
+import com.ilovesshan.imusic.dto.UserCreateDto;
 import com.ilovesshan.imusic.dto.UserDto;
 import com.ilovesshan.imusic.entity.User;
 import com.ilovesshan.imusic.service.UserService;
@@ -42,5 +43,12 @@ public class UserController {
         User user = userService.selectById(id);
         UserVo userVo = userConverter.toVo(user);
         return R.success(R.SUCCESS_MESSAGE_SELECT, userVo);
+    }
+
+    @PostMapping
+    public R create(@RequestBody UserCreateDto userCreateDto) {
+        User user = userService.createUser(userCreateDto);
+        UserVo userVo = userConverter.toVo(user);
+        return R.success(R.SUCCESS_MESSAGE_INSERT, userVo);
     }
 }

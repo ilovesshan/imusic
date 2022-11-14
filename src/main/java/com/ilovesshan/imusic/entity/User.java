@@ -2,8 +2,11 @@ package com.ilovesshan.imusic.entity;
 
 import com.ilovesshan.imusic.enums.Gender;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +20,7 @@ import java.util.List;
 
 @Entity
 @Data
-public class User extends BaseEntity {
+public class User extends BaseEntity implements UserDetails {
 
     @Column(unique = true)
     private String username;
@@ -41,13 +44,42 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    private boolean locked;
+    private Boolean locked = false;
 
-    private boolean enabled;
+    private Boolean enabled = true;
 
     private String lastLoginIp;
 
     private Date lastLoginTime;
 
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        //账号是否未过期
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        // 账号是否未锁定
+        return !getLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        //密码是否未过期
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        //是否激活
+        return getEnabled();
+    }
 }
 
