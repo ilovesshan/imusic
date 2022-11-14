@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * Created with IntelliJ IDEA.
  *
@@ -17,7 +19,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class R {
+public class R implements Serializable {
+
+    private static final long serialVersionUID = 1946123740512009003L;
+
 
     public static final int SUCCESS_CODE = 200;
     public static final int ERROR_CODE_CLIENT = -200;
@@ -43,6 +48,15 @@ public class R {
 
     public static final String SUCCESS_MESSAGE_LOGOUT = "退出登录成功";
     public static final String ERROR_MESSAGE_LOGOUT = "退出登录失败";
+
+    public static final String ERROR_AUTHORIZATION_FAILURE = "授权失败";
+    public static final String ERROR_BAD_CREDENTIALS = "身份认证失败";
+    public static final String ERROR_INSUFFICIENT_AUTHENTICATION = "token解析失败，无效的令牌";
+    public static final String ERROR_ACCOUNT_EXPIRED = "账户过期";
+    public static final String ERROR_CREDENTIALS_EXPIRED = "证书过期";
+    public static final String ERROR_DISABLED = "账户不可用";
+    public static final String ERROR_LOCKED = "账户锁定";
+
 
     private Integer code;
     private String message;

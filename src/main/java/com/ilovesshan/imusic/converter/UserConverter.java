@@ -1,5 +1,6 @@
 package com.ilovesshan.imusic.converter;
 
+import com.ilovesshan.imusic.dto.UserCreateDto;
 import com.ilovesshan.imusic.dto.UserDto;
 import com.ilovesshan.imusic.entity.User;
 import com.ilovesshan.imusic.vo.UserVo;
@@ -19,5 +20,7 @@ import org.springframework.stereotype.Component;
 public interface UserConverter {
     UserVo toVo(User user);
 
-    UserDto toDto(User user);
+    User toEntity(UserDto userDto);
+
+    User toEntity(UserCreateDto userCreateDto);
 }
