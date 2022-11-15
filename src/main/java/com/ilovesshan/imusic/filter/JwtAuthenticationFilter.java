@@ -59,6 +59,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
 
+        String id = ((User) authResult.getPrincipal()).getId();
         String username = ((User) authResult.getPrincipal()).getUsername();
         String token = JWT.create()
                 .withSubject(username)
@@ -67,6 +68,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         // 构建响应给客户端的数据
         HashMap<Object, Object> data = new HashMap<>();
+        data.put("id", id);
         data.put("username", username);
         data.put("token", token);
         String responseJson = new ObjectMapper().writeValueAsString(R.builder().code(200).message(R.SUCCESS_MESSAGE_LOGIN).data(data).build());
