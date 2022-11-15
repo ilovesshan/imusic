@@ -38,7 +38,7 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
             // 用户登录时身份认证失败
             responseMessage = R.ERROR_BAD_CREDENTIALS;
         } else if (authException instanceof InsufficientAuthenticationException) {
-            // 缺少请求头参数,Authorization传递是token值所以参数是必须的
+            // 缺少请求头参数,Authorization传递是token值所以参数是必须的(也有可能是用户名或密码错误)
             responseMessage = R.ERROR_INSUFFICIENT_AUTHENTICATION;
         } else if (authException instanceof AccountExpiredException) {
             //账户过期
