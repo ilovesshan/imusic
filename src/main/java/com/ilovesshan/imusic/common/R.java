@@ -49,9 +49,9 @@ public class R implements Serializable {
     public static final String SUCCESS_MESSAGE_LOGOUT = "退出登录成功";
     public static final String ERROR_MESSAGE_LOGOUT = "退出登录失败";
 
-    public static final String ERROR_AUTHORIZATION_FAILURE = "token解析失败，无效的令牌";
+    public static final String ERROR_AUTHORIZATION_FAILURE = "授权失败";
     public static final String ERROR_BAD_CREDENTIALS = "身份认证失败";
-    public static final String ERROR_INSUFFICIENT_AUTHENTICATION = "无效的用户名或者密码";
+    public static final String ERROR_INSUFFICIENT_AUTHENTICATION = "token解析失败，无效的令牌";
     public static final String ERROR_ACCOUNT_EXPIRED = "账户过期";
     public static final String ERROR_CREDENTIALS_EXPIRED = "证书过期";
     public static final String ERROR_DISABLED = "账户不可用";
