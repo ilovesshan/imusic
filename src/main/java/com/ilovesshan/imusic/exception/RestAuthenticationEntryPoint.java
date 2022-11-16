@@ -57,7 +57,7 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
             responseMessage = R.ERROR_AUTHORIZATION_FAILURE;
         }
 
-        String responseJson = new ObjectMapper().writeValueAsString(R.builder().code(403).message(responseMessage).build());
+        String responseJson = new ObjectMapper().writeValueAsString(R.builder().code(401).message(responseMessage).build());
         response.getWriter().print(responseJson);
         response.getWriter().flush();
     }
