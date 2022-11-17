@@ -1,4 +1,4 @@
-package com.ilovesshan.imusic.vo;
+package com.ilovesshan.imusic.beans.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

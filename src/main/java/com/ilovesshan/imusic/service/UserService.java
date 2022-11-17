@@ -1,8 +1,8 @@
 package com.ilovesshan.imusic.service;
 
-import com.ilovesshan.imusic.dto.UserCreateDto;
-import com.ilovesshan.imusic.dto.UserDto;
-import com.ilovesshan.imusic.entity.User;
+import com.ilovesshan.imusic.beans.dto.UserCreateDto;
+import com.ilovesshan.imusic.beans.dto.UserDto;
+import com.ilovesshan.imusic.beans.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.userdetails.UserDetailsService;
 

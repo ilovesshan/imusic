@@ -1,6 +1,6 @@
 package com.ilovesshan.imusic.repository;
 
-import com.ilovesshan.imusic.entity.User;
+import com.ilovesshan.imusic.beans.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

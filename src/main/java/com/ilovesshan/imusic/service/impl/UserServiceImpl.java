@@ -1,9 +1,9 @@
 package com.ilovesshan.imusic.service.impl;
 
 import com.ilovesshan.imusic.converter.UserConverter;
-import com.ilovesshan.imusic.dto.UserCreateDto;
-import com.ilovesshan.imusic.dto.UserDto;
-import com.ilovesshan.imusic.entity.User;
+import com.ilovesshan.imusic.beans.dto.UserCreateDto;
+import com.ilovesshan.imusic.beans.dto.UserDto;
+import com.ilovesshan.imusic.beans.entity.User;
 import com.ilovesshan.imusic.exception.CustomException;
 import com.ilovesshan.imusic.repository.UserRepository;
 import com.ilovesshan.imusic.service.UserService;

@@ -1,8 +1,6 @@
-package com.ilovesshan.imusic.entity;
+package com.ilovesshan.imusic.beans.vo;
 
 import lombok.Data;
-
-import javax.persistence.Entity;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,9 +10,9 @@ import javax.persistence.Entity;
  * @description:
  */
 
-@Entity
 @Data
-public class Role extends BaseEntity {
+public class RoleVo extends BaseVo {
+    private String id;
 
     private String name;
 

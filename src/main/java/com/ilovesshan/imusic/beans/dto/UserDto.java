@@ -1,4 +1,4 @@
-package com.ilovesshan.imusic.dto;
+package com.ilovesshan.imusic.beans.dto;
 
 import com.ilovesshan.imusic.enums.Gender;
 import lombok.Data;

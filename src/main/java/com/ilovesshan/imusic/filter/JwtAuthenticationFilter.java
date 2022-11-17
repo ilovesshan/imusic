@@ -5,7 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ilovesshan.imusic.common.R;
 import com.ilovesshan.imusic.config.SecurityConfig;
-import com.ilovesshan.imusic.entity.User;
+import com.ilovesshan.imusic.beans.entity.User;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

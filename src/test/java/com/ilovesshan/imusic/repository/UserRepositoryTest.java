@@ -1,6 +1,6 @@
 package com.ilovesshan.imusic.repository;
 
-import com.ilovesshan.imusic.entity.User;
+import com.ilovesshan.imusic.beans.entity.User;
 import com.ilovesshan.imusic.enums.Gender;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
