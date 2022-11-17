@@ -3,9 +3,8 @@ package com.ilovesshan.imusic.service;
 import com.ilovesshan.imusic.dto.UserCreateDto;
 import com.ilovesshan.imusic.dto.UserDto;
 import com.ilovesshan.imusic.entity.User;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.userdetails.UserDetailsService;
-
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,12 +15,14 @@ import java.util.List;
  */
 public interface UserService extends UserDetailsService {
 
-    List<User> selectAll(UserDto userDto);
+    Page<User> selectAll(UserDto userDto, Integer pageNum, Integer pageSize);
 
     User selectById(String id);
 
-    User createUser(UserCreateDto userCreateDto);
+    User createUser(UserCreateDto userLoginDto);
 
     @Override
     User loadUserByUsername(String username);
+
+    void deleteById(String id);
 }

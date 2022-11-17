@@ -3,8 +3,6 @@ package com.ilovesshan.imusic.dto;
 import com.ilovesshan.imusic.enums.Gender;
 import lombok.Data;
 
-import java.util.Date;
-
 /**
  * Created with IntelliJ IDEA.
  *
@@ -26,8 +24,4 @@ public class UserDto {
     private boolean locked;
 
     private boolean enabled;
-
-    private String lastLoginIp;
-
-    private Date lastLoginTime;
 }

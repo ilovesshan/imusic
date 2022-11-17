@@ -7,12 +7,19 @@ import com.ilovesshan.imusic.entity.User;
 import com.ilovesshan.imusic.exception.CustomException;
 import com.ilovesshan.imusic.repository.UserRepository;
 import com.ilovesshan.imusic.service.UserService;
+import com.ilovesshan.imusic.utils.IRealIPAddressUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -35,8 +42,14 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public List<User> selectAll(UserDto userDto) {
-        return userRepository.findAll();
+    public Page<User> selectAll(UserDto userDto, Integer pageNum, Integer pageSize) {
+        // if (pageSize != null && pageNum != null) {
+        //     // 分页查询
+        //     Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+        //     return userRepository.findBy(userDto, pageable);
+        // }
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+        return userRepository.findAll(pageable);
     }
 
     @Override
@@ -45,8 +58,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(UserCreateDto userCreateDto) {
-        User user = userConverter.toEntity(userCreateDto);
+    public User createUser(UserCreateDto userLoginDto) {
+        User user = userConverter.toEntity(userLoginDto);
         if (userRepository.findByUsername(user.getUsername()) != null) {
             // 用户已经存在了
             throw new CustomException("用户已经存在");
@@ -61,6 +74,20 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new CustomException("用户不存在");
         }
+        // 更新登录时间 和  登录IP
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        String ipAddress = IRealIPAddressUtil.getIpAddress(request);
+        user.setLastLoginTime(new Date());
+        user.setLastLoginIp(ipAddress);
+        userRepository.save(user);
         return user;
+    }
+
+    @Override
+    public void deleteById(String id) {
+        if (selectById(id) == null) {
+            throw new CustomException("用户不存在");
+        }
+        userRepository.deleteById(id);
     }
 }
