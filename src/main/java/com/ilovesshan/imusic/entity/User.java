@@ -52,6 +52,10 @@ public class User extends BaseEntity implements UserDetails {
 
     private Date lastLoginTime;
 
+    private Date createdTime;
+
+    private Date updatedTime;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,0 +1,25 @@
+package com.ilovesshan.imusic.vo;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+
+import javax.persistence.MappedSuperclass;
+import java.util.Date;
+
+/**
+ * Created with IntelliJ IDEA.
+ *
+ * @author: ilovesshan
+ * @date: 2022/11/17
+ * @description:
+ */
+
+@Data
+@MappedSuperclass
+public abstract class BaseVo {
+    @JsonFormat(pattern = "yyyy-MM-hh HH:mm:ss")
+    private Date createdTime;
+
+    @JsonFormat(pattern = "yyyy-MM-hh HH:mm:ss")
+    private Date updatedTime;
+}

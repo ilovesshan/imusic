@@ -19,10 +19,12 @@ public interface UserService extends UserDetailsService {
 
     User selectById(String id);
 
-    User createUser(UserCreateDto userLoginDto);
+    User createUser(UserCreateDto userCreateDto);
 
     @Override
     User loadUserByUsername(String username);
 
     void deleteById(String id);
+
+    User update(UserDto userDto);
 }

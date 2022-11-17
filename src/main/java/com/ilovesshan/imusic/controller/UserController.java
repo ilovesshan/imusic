@@ -45,10 +45,17 @@ public class UserController {
     }
 
     @PostMapping
-    public R create(@Validated @RequestBody UserCreateDto userLoginDto) {
-        User user = userService.createUser(userLoginDto);
+    public R create(@Validated @RequestBody UserCreateDto userCreateDto) {
+        User user = userService.createUser(userCreateDto);
         UserVo userVo = userConverter.toVo(user);
         return R.success(R.SUCCESS_MESSAGE_INSERT, userVo);
+    }
+
+    @PutMapping
+    public R update(@Validated @RequestBody UserDto userDto) {
+        User user = userService.update(userDto);
+        UserVo userVo = userConverter.toVo(user);
+        return R.success(R.SUCCESS_MESSAGE_UPDATE, userVo);
     }
 
 

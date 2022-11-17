@@ -5,6 +5,7 @@ import com.ilovesshan.imusic.dto.UserDto;
 import com.ilovesshan.imusic.entity.User;
 import com.ilovesshan.imusic.vo.UserVo;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,4 +24,6 @@ public interface UserConverter {
     User toEntity(UserDto userDto);
 
     User toEntity(UserCreateDto userCreateDto);
+
+    User updateEntity(@MappingTarget User user, UserDto userDto);
 }

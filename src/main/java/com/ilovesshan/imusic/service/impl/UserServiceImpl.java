@@ -58,8 +58,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(UserCreateDto userLoginDto) {
-        User user = userConverter.toEntity(userLoginDto);
+    public User createUser(UserCreateDto userCreateDto) {
+        User user = userConverter.toEntity(userCreateDto);
         if (userRepository.findByUsername(user.getUsername()) != null) {
             // 用户已经存在了
             throw new CustomException("用户已经存在");
@@ -89,5 +89,15 @@ public class UserServiceImpl implements UserService {
             throw new CustomException("用户不存在");
         }
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public User update(UserDto userDto) {
+        User selectedUser = selectById(userDto.getId());
+        if (selectedUser == null) {
+            throw new CustomException("用户不存在");
+        }
+        selectedUser = userConverter.updateEntity(selectedUser, userDto);
+        return userRepository.save(selectedUser);
     }
 }
