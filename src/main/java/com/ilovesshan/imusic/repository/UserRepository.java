@@ -1,6 +1,6 @@
 package com.ilovesshan.imusic.repository;
 
-import com.ilovesshan.imusic.entity.User;
+import com.ilovesshan.imusic.beans.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -13,5 +13,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface UserRepository extends JpaRepository<User, String> {
 
     User findByUsername(String username);
-
 }

@@ -1,5 +1,6 @@
-package com.ilovesshan.imusic.vo;
+package com.ilovesshan.imusic.beans.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ilovesshan.imusic.enums.Gender;
 import lombok.Data;
 
@@ -15,7 +16,7 @@ import java.util.List;
  */
 
 @Data
-public class UserVo {
+public class UserVo extends BaseVo {
     private String id;
 
     private String username;
@@ -32,5 +33,7 @@ public class UserVo {
 
     private String lastLoginIp;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date lastLoginTime;
+
 }

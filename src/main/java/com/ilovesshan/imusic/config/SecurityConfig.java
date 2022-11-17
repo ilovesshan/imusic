@@ -35,14 +35,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public static final String SECURITY_KEY = "imusic";
     public static final String HEADER_KEY = "Authorization";
     public static final String TOKEN_PREFIX = "Bearer ";
-    public static final String SIGN_UP_URL = "/users/";
     public static final long EXPIRE = 1000 * 60 * 60 * 24; // 过期时间 一天
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
+                .antMatchers(HttpMethod.GET, "/").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JwtAuthenticationFilter(authenticationManager()))

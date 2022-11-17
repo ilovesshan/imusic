@@ -2,16 +2,15 @@ package com.ilovesshan.imusic.controller;
 
 import com.ilovesshan.imusic.common.R;
 import com.ilovesshan.imusic.converter.UserConverter;
-import com.ilovesshan.imusic.dto.UserCreateDto;
-import com.ilovesshan.imusic.dto.UserDto;
-import com.ilovesshan.imusic.entity.User;
+import com.ilovesshan.imusic.beans.dto.UserCreateDto;
+import com.ilovesshan.imusic.beans.dto.UserDto;
+import com.ilovesshan.imusic.beans.entity.User;
 import com.ilovesshan.imusic.service.UserService;
-import com.ilovesshan.imusic.vo.UserVo;
+import com.ilovesshan.imusic.beans.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created with IntelliJ IDEA.
@@ -32,9 +31,9 @@ public class UserController {
     private UserConverter userConverter;
 
     @GetMapping
-    public R selectAll(UserDto userDto) {
-        List<User> userList = userService.selectAll(userDto);
-        List<UserVo> userVos = userList.stream().map(userConverter::toVo).collect(Collectors.toList());
+    public R selectAll(UserDto userDto, Integer pageNum, Integer pageSize) {
+        Page<User> userList = userService.selectAll(userDto, pageNum, pageSize);
+        Page<UserVo> userVos = userList.map(userConverter::toVo);
         return R.success(R.SUCCESS_MESSAGE_SELECT, userVos);
     }
 
@@ -46,9 +45,23 @@ public class UserController {
     }
 
     @PostMapping
-    public R create(@RequestBody UserCreateDto userCreateDto) {
+    public R create(@Validated @RequestBody UserCreateDto userCreateDto) {
         User user = userService.createUser(userCreateDto);
         UserVo userVo = userConverter.toVo(user);
         return R.success(R.SUCCESS_MESSAGE_INSERT, userVo);
+    }
+
+    @PutMapping
+    public R update(@Validated @RequestBody UserDto userDto) {
+        User user = userService.update(userDto);
+        UserVo userVo = userConverter.toVo(user);
+        return R.success(R.SUCCESS_MESSAGE_UPDATE, userVo);
+    }
+
+
+    @DeleteMapping("/{id}")
+    public R deleteById(@PathVariable String id) {
+        userService.deleteById(id);
+        return R.success(R.SUCCESS_MESSAGE_DELETE);
     }
 }

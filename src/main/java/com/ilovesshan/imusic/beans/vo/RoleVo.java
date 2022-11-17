@@ -1,4 +1,4 @@
-package com.ilovesshan.imusic.vo;
+package com.ilovesshan.imusic.beans.vo;
 
 import lombok.Data;
 
@@ -11,7 +11,7 @@ import lombok.Data;
  */
 
 @Data
-public class RoleVo {
+public class RoleVo extends BaseVo {
     private String id;
 
     private String name;

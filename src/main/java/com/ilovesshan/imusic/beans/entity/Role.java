@@ -1,4 +1,4 @@
-package com.ilovesshan.imusic.entity;
+package com.ilovesshan.imusic.beans.entity;
 
 import lombok.Data;
 

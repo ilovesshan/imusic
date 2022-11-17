@@ -1,4 +1,4 @@
-package com.ilovesshan.imusic.entity;
+package com.ilovesshan.imusic.beans.entity;
 
 import com.ilovesshan.imusic.enums.Gender;
 import lombok.Data;
@@ -51,6 +51,10 @@ public class User extends BaseEntity implements UserDetails {
     private String lastLoginIp;
 
     private Date lastLoginTime;
+
+    private Date createdTime;
+
+    private Date updatedTime;
 
 
     @Override
