@@ -52,7 +52,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public R handleMethodArgumentNotValidExceptionHandler(AuthorizationException exception) {
         exception.printStackTrace();
-        return R.fail(exception.getMessage());
+        return R.builder().code(R.ERROR_CODE_AUTHORIZATION).message(exception.getMessage()).build();
     }
 
 

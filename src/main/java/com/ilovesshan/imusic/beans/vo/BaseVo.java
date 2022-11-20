@@ -17,9 +17,9 @@ import java.util.Date;
 @Data
 @MappedSuperclass
 public abstract class BaseVo {
-    @JsonFormat(pattern = "yyyy-MM-hh HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-hh HH:mm:ss", timezone = "GMT+8")
     private Date createdTime;
 
-    @JsonFormat(pattern = "yyyy-MM-hh HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-hh HH:mm:ss", timezone = "GMT+8")
     private Date updatedTime;
 }

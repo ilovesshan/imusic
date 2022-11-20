@@ -1,6 +1,7 @@
 package com.ilovesshan.imusic.converter;
 
-import com.ilovesshan.imusic.beans.dto.UserCreateDto;
+import com.ilovesshan.imusic.beans.dto.UserAuthDto;
+import com.ilovesshan.imusic.beans.dto.UserRegisterDto;
 import com.ilovesshan.imusic.beans.dto.UserDto;
 import com.ilovesshan.imusic.beans.entity.User;
 import com.ilovesshan.imusic.beans.vo.UserVo;
@@ -23,7 +24,9 @@ public interface UserConverter {
 
     User toEntity(UserDto userDto);
 
-    User toEntity(UserCreateDto userCreateDto);
+    User toEntity(UserRegisterDto userRegisterDto);
+
+    User toEntity(UserAuthDto userAuthDto);
 
     User updateEntity(@MappingTarget User user, UserDto userDto);
 }

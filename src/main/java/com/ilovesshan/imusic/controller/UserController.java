@@ -1,12 +1,11 @@
 package com.ilovesshan.imusic.controller;
 
-import com.ilovesshan.imusic.common.R;
-import com.ilovesshan.imusic.converter.UserConverter;
-import com.ilovesshan.imusic.beans.dto.UserCreateDto;
 import com.ilovesshan.imusic.beans.dto.UserDto;
 import com.ilovesshan.imusic.beans.entity.User;
-import com.ilovesshan.imusic.service.UserService;
 import com.ilovesshan.imusic.beans.vo.UserVo;
+import com.ilovesshan.imusic.common.R;
+import com.ilovesshan.imusic.converter.UserConverter;
+import com.ilovesshan.imusic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
@@ -44,12 +43,6 @@ public class UserController {
         return R.success(R.SUCCESS_MESSAGE_SELECT, userVo);
     }
 
-    @PostMapping
-    public R create(@Validated @RequestBody UserCreateDto userCreateDto) {
-        User user = userService.createUser(userCreateDto);
-        UserVo userVo = userConverter.toVo(user);
-        return R.success(R.SUCCESS_MESSAGE_INSERT, userVo);
-    }
 
     @PutMapping
     public R update(@Validated @RequestBody UserDto userDto) {
