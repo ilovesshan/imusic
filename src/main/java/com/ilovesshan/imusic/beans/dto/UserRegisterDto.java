@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
  */
 
 @Data
-public class UserCreateDto {
+public class UserRegisterDto {
 
     @NotNull
     @Size(min = 4, max = 24, message = "用户名长度应该在4-24个字符之间")
