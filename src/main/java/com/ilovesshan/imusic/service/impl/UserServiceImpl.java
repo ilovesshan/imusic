@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
                     predicates.add(criteriaBuilder.like(root.get("username"), "%" + userDto.getUsername() + "%"));
                 }
 
-                // 是否传入用于查询的姓名
+                // 是否传入用于查询的昵称
                 if (!StringUtils.isEmpty(userDto.getNickname())) {
                     predicates.add(criteriaBuilder.like(root.get("nickname"), "%" + userDto.getNickname() + "%"));
                 }
