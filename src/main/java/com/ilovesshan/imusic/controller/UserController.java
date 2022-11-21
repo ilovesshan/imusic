@@ -8,6 +8,7 @@ import com.ilovesshan.imusic.converter.UserConverter;
 import com.ilovesshan.imusic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,7 @@ public class UserController {
     private UserConverter userConverter;
 
     @GetMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public R selectAll(UserDto userDto, Integer pageNum, Integer pageSize) {
         Page<User> userList = userService.selectAll(userDto, pageNum, pageSize);
         Page<UserVo> userVos = userList.map(userConverter::toVo);
@@ -53,6 +55,7 @@ public class UserController {
 
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public R deleteById(@PathVariable String id) {
         userService.deleteById(id);
         return R.success(R.SUCCESS_MESSAGE_DELETE);

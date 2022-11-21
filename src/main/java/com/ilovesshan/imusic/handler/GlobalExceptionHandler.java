@@ -4,6 +4,7 @@ import com.ilovesshan.imusic.common.R;
 import com.ilovesshan.imusic.exception.AuthorizationException;
 import com.ilovesshan.imusic.exception.CustomException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -41,6 +42,17 @@ public class GlobalExceptionHandler {
     public R handleMethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException exception) {
         exception.printStackTrace();
         return R.fail(exception.getAllErrors().get(0).getDefaultMessage());
+    }
+
+    /**
+     * 无权访问
+     */
+    @ExceptionHandler(value = {AccessDeniedException.class})
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ResponseBody
+    public R handleMethodArgumentNotValidExceptionHandler(AccessDeniedException exception) {
+        exception.printStackTrace();
+        return R.builder().code(R.ERROR_CODE_FORBIDDEN).message(R.ERROR_MESSAGE_FORBIDDEN).build();
     }
 
 

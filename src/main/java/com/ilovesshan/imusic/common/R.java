@@ -27,7 +27,9 @@ public class R implements Serializable {
     public static final int SUCCESS_CODE = 200;
     public static final int ERROR_CODE_CLIENT = -200;
     public static final int ERROR_CODE_AUTHORIZATION = 401;
+    public static final int ERROR_CODE_FORBIDDEN = 403;
     public static final int ERROR_CODE_SERVER = 500;
+
 
     public static final String SUCCESS_MESSAGE = "操作成功";
     public static final String SUCCESS_MESSAGE_SELECT = "查询成功";
@@ -50,6 +52,7 @@ public class R implements Serializable {
     public static final String SUCCESS_MESSAGE_LOGOUT = "退出登录成功";
     public static final String ERROR_MESSAGE_LOGOUT = "退出登录失败";
 
+    public static final String ERROR_MESSAGE_FORBIDDEN = "暂无权限访问/操作该资源";
     public static final String ERROR_AUTHORIZATION_FAILURE = "授权失败";
     public static final String ERROR_BAD_CREDENTIALS = "身份认证失败";
     public static final String ERROR_INSUFFICIENT_AUTHENTICATION = "token解析失败，无效的令牌";
