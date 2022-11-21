@@ -1,8 +1,7 @@
--- 重置用户表、角色表、用户角色表 并添加初始化数据
-
-DELETE FROM `user_role`;
+-- 重置用户角色表 并添加初始化数据
+DELETE FROM user_role;
 DELETE FROM `user`;
-DELETE FROM `role`;
+DELETE FROM role;
 
 
 INSERT INTO
@@ -24,5 +23,5 @@ INSERT INTO
 VALUES
 	('2Hecgl1fzxwlokRQ96HAUPxXuHp', '2HecmkwtyZvwEtpTH1G3LvDobLm'),
 	('2Hecgl1fzxwlokRQ96HAUPxXuHp', '2HnejXgnRrJaoN9LgiXpth8zPmO'),
-	('2HXLGC2YfMZhzoB0wlWkmTeE9zq', '2HecmkwtyZvwEtpTH1G3LvDobLm');
+	('2HXLGC2YfMZhzoB0wlWkmTeE9zq', '2HnejXgnRrJaoN9LgiXpth8zPmO');
 
