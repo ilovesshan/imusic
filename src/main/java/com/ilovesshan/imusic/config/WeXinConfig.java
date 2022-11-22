@@ -19,10 +19,10 @@ import org.springframework.context.annotation.Configuration;
 public class WeXinConfig {
 
 
-    @Value("${weixin.mp.app-id}")
+    @Value("${WX_APP_ID}")
     private String appId;
 
-    @Value("${weixin.mp.app-secret}")
+    @Value("${WX_APP_SECRET}")
     private String appSecret;
 
     @Bean
