@@ -1,5 +1,6 @@
 package com.ilovesshan.imusic.service.impl;
 
+import com.alibaba.druid.util.StringUtils;
 import com.ilovesshan.imusic.beans.dto.UserAuthDto;
 import com.ilovesshan.imusic.beans.dto.UserDto;
 import com.ilovesshan.imusic.beans.dto.UserRegisterDto;
@@ -20,8 +21,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.persistence.criteria.Predicate;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -44,12 +48,40 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public Page<User> selectAll(UserDto userDto, Integer pageNum, Integer pageSize) {
-        // if (pageSize != null && pageNum != null) {
-        //     // 分页查询
-        //     Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
-        //     return userRepository.findBy(userDto, pageable);
-        // }
+    public Page selectAll(UserDto userDto, Integer pageNum, Integer pageSize) {
+        if (pageSize != null && pageNum != null) {
+            // 分页查询
+            Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+            return userRepository.findAll((root, query, criteriaBuilder) -> {
+                List<Predicate> predicates = new ArrayList<>();
+                // 是否传入用于查询的姓名
+                if (!StringUtils.isEmpty(userDto.getUsername())) {
+                    predicates.add(criteriaBuilder.like(root.get("username"), "%" + userDto.getUsername() + "%"));
+                }
+
+                // 是否传入用于查询的昵称
+                if (!StringUtils.isEmpty(userDto.getNickname())) {
+                    predicates.add(criteriaBuilder.like(root.get("nickname"), "%" + userDto.getNickname() + "%"));
+                }
+
+                // 是否传入用于查询的性别
+                if (userDto.getGender() != null) {
+                    predicates.add(criteriaBuilder.equal(root.get("gender"), userDto.getGender()));
+                }
+
+                // 是否传入用于查询的锁定状态
+                if (userDto.getLocked() != null) {
+                    predicates.add(criteriaBuilder.equal(root.get("locked"), userDto.getLocked()));
+                }
+
+                // 是否传入用于查询的启用状态
+                if (userDto.getEnabled() != null) {
+                    predicates.add(criteriaBuilder.equal(root.get("enabled"), userDto.getEnabled()));
+                }
+
+                return query.where(predicates.toArray(new Predicate[0])).getRestriction();
+            }, pageable);
+        }
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
         return userRepository.findAll(pageable);
     }
@@ -70,20 +102,20 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-     // @Override
-     // public User loadUserByUsername(String username) throws UsernameNotFoundException {
-     //     User user = userRepository.findByUsername(username);
-     //     if (user == null) {
-     //         throw new CustomException("用户不存在");
-     //     }
-     //     // 更新登录时间 和  登录IP
-     //     HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-     //     String ipAddress = IRealIPAddressUtil.getIpAddress(request);
-     //     user.setLastLoginTime(new Date());
-     //     user.setLastLoginIp(ipAddress);
-     //     userRepository.save(user);
-     //     return user;
-     // }
+    // @Override
+    // public User loadUserByUsername(String username) throws UsernameNotFoundException {
+    //     User user = userRepository.findByUsername(username);
+    //     if (user == null) {
+    //         throw new CustomException("用户不存在");
+    //     }
+    //     // 更新登录时间 和  登录IP
+    //     HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+    //     String ipAddress = IRealIPAddressUtil.getIpAddress(request);
+    //     user.setLastLoginTime(new Date());
+    //     user.setLastLoginIp(ipAddress);
+    //     userRepository.save(user);
+    //     return user;
+    // }
 
     @Override
     public void deleteById(String id) {
