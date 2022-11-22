@@ -24,4 +24,7 @@ spring:
     generate-ddl: false
     show-sql: true
 
-
+weixin:
+  mp:
+    app-id: wx8b003496bd6f09fa
+    app-secret: 8ef209a98bd3f957d00f02ae3bb45c54
