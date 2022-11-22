@@ -9,6 +9,7 @@ import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +26,9 @@ import java.util.Arrays;
 @RestController
 @RequestMapping("/weixin")
 public class WeiXinController {
-    private static final String TOKEN = "weixinToken";
+
+    @Value("${WX_TOKEN_KEY}")
+    private String token;
 
     @Autowired
     private WxMpService wxMpService;
@@ -40,7 +43,7 @@ public class WeiXinController {
         System.out.println("timestamp: " + timestamp);
         System.out.println("nonce: " + nonce);
         System.out.println("echostr: " + echostr);
-        String[] params = new String[]{nonce, timestamp, TOKEN};
+        String[] params = new String[]{nonce, timestamp, token};
         Arrays.sort(params);
         String signatureResult = DigestUtils.sha1Hex(params[0] + params[1] + params[2]);
         //校验签名

@@ -29,6 +29,10 @@ ENV MYSQL_DATABASE imusic
 ENV MYSQL_USER_NAME root
 ENV MySQL_PASSWORD 8PGCRqtc
 
+ENV WX_APP_ID wx8b003496bd6f09fa
+ENV WX_APP_SECRET 8ef209a98bd3f957d00f02ae3bb45c54
+ENV WX_TOKEN_KEY 2HXLGC2YfMZhzoB0wlWkmTeE9zq
+
 # 安装依赖包，如需其他依赖包，请到alpine依赖包管理(https://pkgs.alpinelinux.org/packages?name=php8*imagick*&branch=v3.13)查找。
 # 选用国内镜像源以提高下载速度
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tencent.com/g' /etc/apk/repositories \
