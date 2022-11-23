@@ -8,6 +8,8 @@ import com.ilovesshan.imusic.common.R;
 import com.ilovesshan.imusic.converter.MusicConverter;
 import com.ilovesshan.imusic.enums.MusicStatus;
 import com.ilovesshan.imusic.service.MusicService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -24,6 +26,7 @@ import java.util.stream.Collectors;
  * @description:
  */
 
+@Api(tags = "音乐模块")
 @RestController
 @RequestMapping("/musics")
 public class MusicController {
@@ -35,12 +38,14 @@ public class MusicController {
     private MusicConverter musicConverter;
 
 
+    @ApiOperation(value = "根据ID查询")
     @GetMapping("/{id}")
     public R selectById(@PathVariable String id) {
         Music music = musicService.findById(id);
         return R.success(R.SUCCESS_MESSAGE_SELECT, musicConverter.toVo(music));
     }
 
+    @ApiOperation(value = "分页查询")
     @GetMapping
     public R selectAll() {
         List<Music> musicList = musicService.findAll();
@@ -49,6 +54,7 @@ public class MusicController {
     }
 
 
+    @ApiOperation(value = "新增")
     @PostMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public R create(@Validated @RequestBody MusicCreateDto musicCreateDto) {
@@ -57,6 +63,7 @@ public class MusicController {
     }
 
 
+    @ApiOperation(value = "更新")
     @PutMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public R update(@Validated @RequestBody MusicUpdateDto musicUpdateDto) {
@@ -65,6 +72,7 @@ public class MusicController {
     }
 
 
+    @ApiOperation(value = "上架")
     @PutMapping("/publish/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public R publish(@PathVariable String id) {
@@ -73,6 +81,7 @@ public class MusicController {
     }
 
 
+    @ApiOperation(value = "下架")
     @PutMapping("/close/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public R close(@PathVariable String id) {
@@ -81,6 +90,7 @@ public class MusicController {
     }
 
 
+    @ApiOperation(value = "根据ID删除")
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public R delete(@PathVariable String id) {

@@ -6,9 +6,10 @@ import com.ilovesshan.imusic.beans.vo.UserVo;
 import com.ilovesshan.imusic.common.R;
 import com.ilovesshan.imusic.converter.UserConverter;
 import com.ilovesshan.imusic.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
  * @description:
  */
 
+@Api(tags = "用户模块")
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -30,14 +32,15 @@ public class UserController {
     @Autowired
     private UserConverter userConverter;
 
+    @ApiOperation(value = "分页查询")
     @GetMapping
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public R selectAll(UserDto userDto, Integer pageNum, Integer pageSize) {
         Page<User> userList = userService.selectAll(userDto, pageNum, pageSize);
         Page<UserVo> userVos = userList.map(userConverter::toVo);
         return R.success(R.SUCCESS_MESSAGE_SELECT, userVos);
     }
 
+    @ApiOperation(value = "根据ID查询")
     @GetMapping("/{id}")
     public R selectAll(@PathVariable String id) {
         User user = userService.selectById(id);
@@ -46,6 +49,7 @@ public class UserController {
     }
 
 
+    @ApiOperation(value = "更新")
     @PutMapping
     public R update(@Validated @RequestBody UserDto userDto) {
         User user = userService.update(userDto);
@@ -54,8 +58,8 @@ public class UserController {
     }
 
 
+    @ApiOperation(value = "根据ID删除")
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public R deleteById(@PathVariable String id) {
         userService.deleteById(id);
         return R.success(R.SUCCESS_MESSAGE_DELETE);
