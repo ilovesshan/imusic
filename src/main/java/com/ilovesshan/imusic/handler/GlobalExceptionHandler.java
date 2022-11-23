@@ -37,7 +37,6 @@ public class GlobalExceptionHandler {
      * 参数不匹配异常
      */
     @ExceptionHandler(value = {MethodArgumentNotValidException.class})
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public R handleMethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException exception) {
         exception.printStackTrace();

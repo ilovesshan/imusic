@@ -5,6 +5,11 @@ spring:
   application:
     name: imusic
 
+  mvc:
+    pathmatch:
+      # 配置策略
+      matching-strategy: ant-path-matcher
+
   config:
     import: optional:file:.env[.properties]
 

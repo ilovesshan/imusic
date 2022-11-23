@@ -2,6 +2,8 @@ package com.ilovesshan.imusic.controller;
 
 import com.ilovesshan.imusic.common.R;
 import com.ilovesshan.imusic.exception.CustomException;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
@@ -23,6 +25,7 @@ import java.util.Arrays;
  * @description:
  */
 
+@Api(tags = "微信模块")
 @RestController
 @RequestMapping("/weixin")
 public class WeiXinController {
@@ -33,6 +36,7 @@ public class WeiXinController {
     @Autowired
     private WxMpService wxMpService;
 
+    @ApiOperation(value = "微信绑定测试")
     @GetMapping("/receive")
     public String receiveWxToken(HttpServletRequest request) {
         String signature = request.getParameter("signature");
@@ -53,12 +57,14 @@ public class WeiXinController {
         return echostr;
     }
 
+    @ApiOperation(value = "获取授权地址")
     @GetMapping("/accessUrl")
     public String accessUrl(@RequestParam String redirectUrl) {
         String authorizationUrl = wxMpService.getOAuth2Service().buildAuthorizationUrl(wxMpService.getOAuth2Service().buildAuthorizationUrl(redirectUrl, WxConsts.OAuth2Scope.SNSAPI_USERINFO, null), WxConsts.OAuth2Scope.SNSAPI_USERINFO, null);
         return authorizationUrl;
     }
 
+    @ApiOperation(value = "授权")
     @GetMapping("/authorization/{authorizationCode}")
     public R authorization(@PathVariable String authorizationCode) throws WxErrorException {
         WxOAuth2AccessToken wxOAuth2AccessToken = wxMpService.getOAuth2Service().getAccessToken(authorizationCode);
